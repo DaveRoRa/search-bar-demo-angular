@@ -17,11 +17,14 @@ import { filter, fromEvent, Subscription } from 'rxjs';
 export class ClickOutsideDirective implements AfterViewInit, OnDestroy {
   clickOutside = output();
   documentClickSubscription: Subscription | undefined;
-  constructor(
+  private element = inject(ElementRef<HTMLElement>);
+  private document = inject(DOCUMENT);
+
+  /* constructor(
     private element: ElementRef<HTMLElement>,
     @Inject(DOCUMENT) private document: Document
-  ) {}
-
+  ) {} */
+ 
   ngAfterViewInit(): void {
     this.documentClickSubscription = fromEvent(this.document, 'click')
       .pipe(
